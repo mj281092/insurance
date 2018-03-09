@@ -20,7 +20,14 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
+	@RequestMapping(value={"/", "/home"}, method = RequestMethod.GET)
+	public ModelAndView visitorHome(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("visitorhome");
+		return modelAndView;
+	}
+
+	@RequestMapping(value={"/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
@@ -39,7 +46,6 @@ public class LoginController {
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
-		System.out.print("*********");
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByEmail(user.getEmail());
 		if (userExists != null) {
@@ -59,9 +65,20 @@ public class LoginController {
 		}
 		return modelAndView;
 	}
+
+	@RequestMapping(value="/user/home", method = RequestMethod.GET)
+	public ModelAndView userHome(){
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+		modelAndView.addObject("userMessage","Content Available Only for Users with User Role");
+		modelAndView.setViewName("user/home");
+		return modelAndView;
+	}
 	
 	@RequestMapping(value="/admin/home", method = RequestMethod.GET)
-	public ModelAndView home(){
+	public ModelAndView adminHome(){
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
