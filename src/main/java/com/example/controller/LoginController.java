@@ -20,12 +20,21 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value={"/", "/home"}, method = RequestMethod.GET)
-	public ModelAndView visitorHome(){
+	@RequestMapping(value={"/", "/ipHome"}, method = RequestMethod.GET)
+	public ModelAndView ipHome(){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("visitorhome");
+		modelAndView.setViewName("ipHome");
 		return modelAndView;
 	}
+	
+	@RequestMapping(value={"/visitor", "/visitor/home"}, method = RequestMethod.GET)
+	public ModelAndView vHome(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("visitor/home");
+		return modelAndView;
+	}
+	
+
 
 	@RequestMapping(value={"/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
@@ -66,25 +75,26 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value="/user/home", method = RequestMethod.GET)
-	public ModelAndView userHome(){
-		ModelAndView modelAndView = new ModelAndView();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-		modelAndView.addObject("userMessage","Content Available Only for Users with User Role");
-		modelAndView.setViewName("user/home");
-		return modelAndView;
-	}
 	
-	@RequestMapping(value="/admin/home", method = RequestMethod.GET)
-	public ModelAndView adminHome(){
+	@RequestMapping(value= {"/admin","/admin/home"}, method = RequestMethod.GET)
+	public ModelAndView aHome(){
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
 		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
 		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
 		modelAndView.setViewName("admin/home");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value= {"/user","/user/home"}, method = RequestMethod.GET)
+	public ModelAndView uHome(){
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+		modelAndView.addObject("userMessage","Content Available Only for Users with access");
+		modelAndView.setViewName("user/home");
 		return modelAndView;
 	}
 	
