@@ -22,34 +22,34 @@
 					<h2>Registration Form</h2>
 					<div class="form-group">
 						<div class="col-sm-9">
-						<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+						<label th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"
 								class="validation-message"></label>
-						<input type="text" th:field="*{name}" placeholder="Name"
+						<input type="text" th:field="*{userName}" placeholder="Name"
 								class="form-control" /> 
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-sm-9">
-						<label	th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+						<label	th:if="${#fields.hasErrors('userLastName')}" th:errors="*{userLastName}"
 								class="validation-message"></label>
-							<input type="text" th:field="*{lastName}"
+							<input type="text" th:field="*{userLastName}"
 								placeholder="Last Name" class="form-control" /> 
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-9">
-							<input type="text" th:field="*{email}" placeholder="Email"
+							<input type="text" th:field="*{userEmail}" placeholder="Email"
 								class="form-control" /> <label
-								th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+								th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}"
 								class="validation-message"></label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-9">
-							<input type="password" th:field="*{password}"
+							<input type="password" th:field="*{userPassword}"
 								placeholder="Password" class="form-control" /> <label
-								th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+								th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}"
 								class="validation-message"></label>
 						</div>
 					</div>

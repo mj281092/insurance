@@ -34,23 +34,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public User findUserByEmail(String email) {
-		return userRepository.findByEmail(email);
+		return userRepository.findByUserEmail(email);
 	}
 
 	@Override
 	public void saveUser(User user) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		user.setUserPassword(bCryptPasswordEncoder.encode(user.getUserPassword()));
 		user.setActive(true);
 		Role userRole = roleRepository.findByRole("USER");
-		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+		user.setUsersRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		userRepository.save(user);
 	}
 
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		User user = userRepository.findByEmail(userName);
-		List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
+		User user = userRepository.findByUserEmail(userName);
+		List<GrantedAuthority> authorities = getUserAuthority(user.getUsersRoles());
 		return buildUserForAuthentication(user, authorities);
 	}
 
@@ -65,6 +65,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
-		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), user.isActive(), true, true, true, authorities);
+		return new org.springframework.security.core.userdetails.User(user.getUserEmail(), user.getUserPassword(), user.isActive(), true, true, true, authorities);
 	}
 }

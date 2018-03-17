@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
@@ -25,82 +26,88 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
-	private int id;
+	private int userId;
 	@Column(name = "email")
 	@Email(message = "*Please provide a valid Email")
 	@NotEmpty(message = "*Please provide an email")
-	private String email;
+	private String userEmail;
 	@Column(name = "password")
 	@Length(min = 5, message = "*Your password must have at least 5 characters")
 	@NotEmpty(message = "*Please provide your password")
 	@Transient
-	private String password;
+	private String userPassword;
 	@Column(name = "name")
 	@NotEmpty(message = "*Please provide your name")
-	private String name;
+	private String userName;
 	@Column(name = "last_name")
 	@NotEmpty(message = "*Please provide your last name")
-	private String lastName;
+	private String userLastName;
 	@Column(name = "active")
 	private boolean active;
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
-
-	public int getId() {
-		return id;
+	private Set<Role> usersRoles;
+	@OneToMany(mappedBy="vehiclesUser", cascade = CascadeType.ALL)
+	private Set<Vehicle> usersVehicles;
+	@OneToMany(mappedBy="ordersUser", cascade = CascadeType.ALL)
+	private Set<Order> usersOrders;
+	
+	
+	public int getUserId() {
+		return userId;
 	}
-
-	public void setId(int id) {
-		this.id = id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-
-	public String getPassword() {
-		return password;
+	public String getUserEmail() {
+		return userEmail;
 	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
-
-	public String getName() {
-		return name;
+	public String getUserPassword() {
+		return userPassword;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
-
-	public String getLastName() {
-		return lastName;
+	public String getUserName() {
+		return userName;
 	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setUserPame(String userName) {
+		this.userName = userName;
 	}
-
-	public String getEmail() {
-		return email;
+	public String getUserLastName() {
+		return userLastName;
 	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserLastName(String userLastName) {
+		this.userLastName = userLastName;
 	}
-
 	public boolean isActive() {
 		return active;
 	}
-
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-
-	public Set<Role> getRoles() {
-		return roles;
+	public Set<Role> getUsersRoles() {
+		return usersRoles;
 	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setUsersRoles(Set<Role> usersRoles) {
+		this.usersRoles = usersRoles;
 	}
+	public Set<Vehicle> getUsersVehicles() {
+		return usersVehicles;
+	}
+	public void setUsersVehicles(Set<Vehicle> usersVehicles) {
+		this.usersVehicles = usersVehicles;
+	}
+	public Set<Order> getUsersOrders() {
+		return usersOrders;
+	}
+	public void setUsersOrders(Set<Order> usersOrders) {
+		this.usersOrders = usersOrders;
+	}
+	
+	
 
 }
