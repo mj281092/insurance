@@ -39,7 +39,7 @@ public class Vehicle {
 	@NotEmpty(message = "*Please provide the vehicle model number")
 	private String vehicleModelno;
 	@OneToMany(mappedBy="ordersVehicle", cascade = CascadeType.ALL)
-	private Set<Order> vehiclesOrders;
+	private Set<Order_> vehiclesOrders;
 	
 	
 	
@@ -67,14 +67,14 @@ public class Vehicle {
 	public void setVehicleModelno(String vehicleModelno) {
 		this.vehicleModelno = vehicleModelno;
 	}
-	public Set<Order> getVehiclesOrders() {
+	public Set<Order_> getVehiclesOrders() {
 		return vehiclesOrders;
 	}
-	public void setVehiclesOrders(Set<Order> vehiclesOrders) {
+	public void setVehiclesOrders(Set<Order_> vehiclesOrders) {
 		this.vehiclesOrders = vehiclesOrders;
 	}
 	
-	public void addtoVehiclesOrders(Order vehiclesOrder) {
+	public void addtoVehiclesOrders(Order_ vehiclesOrder) {
 		this.vehiclesOrders.add(vehiclesOrder);
 	}
 	

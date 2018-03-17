@@ -3,12 +3,12 @@ package com.example.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.model.Order;
+import com.example.model.Order_;
 
 
-@Repository("OrderRepository")
-public interface OrderRepository extends JpaRepository<Order, Integer> {
+@Repository("orderRepository")
+public interface OrderRepository extends JpaRepository<Order_, Integer> {
 	
-	Order findByOrderId(int orderId);
+	Order_ findByOrderId(int orderId);
 
 }

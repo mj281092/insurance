@@ -48,15 +48,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	@Transactional
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		User user = userRepository.findByUserEmail(userName);
+	public UserDetails loadUserByUsername(String userRegName) throws UsernameNotFoundException {
+		User user = userRepository.findByUserEmail(userRegName);
 		List<GrantedAuthority> authorities = getUserAuthority(user.getUsersRoles());
 		return buildUserForAuthentication(user, authorities);
 	}
 
-	private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
+	private List<GrantedAuthority> getUserAuthority(Set<Role> userRegRoles) {
 		Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
-		for (Role role : userRoles) {
+		for (Role role : userRegRoles) {
 			roles.add(new SimpleGrantedAuthority(role.getRole()));
 		}
 

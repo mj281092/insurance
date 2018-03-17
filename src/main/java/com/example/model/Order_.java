@@ -22,8 +22,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Transient;
 
 @Entity
-@Table(name = "order")
-public class Order {
+@Table(name = "order_")
+public class Order_ {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

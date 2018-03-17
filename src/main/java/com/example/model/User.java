@@ -36,12 +36,10 @@ public class User {
 	@NotEmpty(message = "*Please provide your password")
 	@Transient
 	private String userPassword;
-	@Column(name = "name")
-	@NotEmpty(message = "*Please provide your name")
-	private String userName;
-	@Column(name = "last_name")
+
+	@Column(name = "reg_name")
 	@NotEmpty(message = "*Please provide your last name")
-	private String userLastName;
+	private String userRegName;
 	@Column(name = "active")
 	private boolean active;
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -50,7 +48,7 @@ public class User {
 	@OneToMany(mappedBy="vehiclesUser", cascade = CascadeType.ALL)
 	private Set<Vehicle> usersVehicles;
 	@OneToMany(mappedBy="ordersUser", cascade = CascadeType.ALL)
-	private Set<Order> usersOrders;
+	private Set<Order_> usersOrders;
 	
 	
 	public int getUserId() {
@@ -71,17 +69,12 @@ public class User {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
-	public String getUserName() {
-		return userName;
+
+	public String getUserRegName() {
+		return userRegName;
 	}
-	public void setUserPame(String userName) {
-		this.userName = userName;
-	}
-	public String getUserLastName() {
-		return userLastName;
-	}
-	public void setUserLastName(String userLastName) {
-		this.userLastName = userLastName;
+	public void setUserRegName(String userRegName) {
+		this.userRegName = userRegName;
 	}
 	public boolean isActive() {
 		return active;
@@ -101,10 +94,10 @@ public class User {
 	public void setUsersVehicles(Set<Vehicle> usersVehicles) {
 		this.usersVehicles = usersVehicles;
 	}
-	public Set<Order> getUsersOrders() {
+	public Set<Order_> getUsersOrders() {
 		return usersOrders;
 	}
-	public void setUsersOrders(Set<Order> usersOrders) {
+	public void setUsersOrders(Set<Order_> usersOrders) {
 		this.usersOrders = usersOrders;
 	}
 	

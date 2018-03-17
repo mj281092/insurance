@@ -11,7 +11,7 @@ import com.example.model.User;
 import com.example.model.Vehicle;
 import com.example.repository.UserRepository;
 import com.example.repository.VehicleRepository;
-import com.example.model.Order;
+import com.example.model.Order_;
 import com.example.repository.OrderRepository;
 
 @Service("orderSevice")
@@ -23,7 +23,7 @@ public class OrderServiceImpl implements OrderService {
 	
 	
 	@Override
-	public Order findOrderbyId(int orderId) {
+	public Order_ findOrderbyId(int orderId) {
 		// TODO Auto-generated method stub
 		
 		return orderRepository.findByOrderId(orderId);
@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void saveOrder(User user, Order order, Vehicle vehicle) {
+	public void saveOrder(User user, Order_ order, Vehicle vehicle) {
 		// TODO Auto-generated method stub
 		
 

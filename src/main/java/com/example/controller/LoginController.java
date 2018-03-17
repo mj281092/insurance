@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.model.Order;
+import com.example.model.Order_;
 import com.example.model.User;
 import com.example.model.Vehicle;
 import com.example.service.OrderService;
@@ -92,7 +92,7 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Welcome " + user.getUserName() + " " + user.getUserLastName() + " (" + user.getUserEmail() + ")");
+		modelAndView.addObject("userName", "Welcome " + user.getUserId() + " " + user.getUserRegName() + " (" + user.getUserEmail() + ")");
 		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
 		modelAndView.setViewName("admin/home");
 		return modelAndView;
@@ -103,7 +103,7 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Welcome " + user.getUserName() + " " + user.getUserLastName() + " (" + user.getUserEmail() + ")");
+		modelAndView.addObject("userName", "Welcome " + user.getUserId() + " " + user.getUserRegName() + " (" + user.getUserEmail() + ")");
 		modelAndView.addObject("userMessage","Content Available Only for Users with access");
 		modelAndView.setViewName("user/home");
 		return modelAndView;
@@ -116,7 +116,7 @@ public class LoginController {
 		modelAndView.addObject("vehicle", vehicle);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Welcome " + user.getUserName() + " " + user.getUserLastName() + " (" + user.getUserEmail() + ")");
+		modelAndView.addObject("userName", "Welcome " + user.getUserId() + " " + user.getUserRegName() + " (" + user.getUserEmail() + ")");
 		modelAndView.setViewName("vehicleRegistration");
 		return modelAndView;
 	}
@@ -126,7 +126,7 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Welcome " + user.getUserName() + " " + user.getUserLastName() + " (" + user.getUserEmail() + ")");
+		modelAndView.addObject("userName", "Welcome " + user.getUserId() + " " + user.getUserRegName() + " (" + user.getUserEmail() + ")");
 		Vehicle vehicleExists = vehicleService.findVehiclebyRegno(vehicle.getVehicleRegno());
 		if (vehicleExists != null) {
 			bindingResult
@@ -150,21 +150,21 @@ public class LoginController {
 	@RequestMapping(value="/user/orderPage", method = RequestMethod.GET)
 	public ModelAndView orderRegistration(){
 		ModelAndView modelAndView = new ModelAndView();
-		Order order = new Order();;
+		Order_ order = new Order_();;
 		modelAndView.addObject("order", order);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Welcome " + user.getUserName() + " " + user.getUserLastName() + " (" + user.getUserEmail() + ")");
+		modelAndView.addObject("userName", "Welcome " + user.getUserId() + " " + user.getUserRegName() + " (" + user.getUserEmail() + ")");
 		modelAndView.setViewName("orderRegistration");
 		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/user/orderPage", method = RequestMethod.POST)
-	public ModelAndView createNewOrder(@Valid Order order,@RequestParam("vRegno") String vRegno, BindingResult bindingResult) {
+	public ModelAndView createNewOrder(@Valid Order_ order,@RequestParam("vRegno") String vRegno, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Welcome " + user.getUserName() + " " + user.getUserLastName() + " (" + user.getUserEmail() + ")");
+		modelAndView.addObject("userName", "Welcome " + user.getUserId() + " " + user.getUserRegName() + " (" + user.getUserEmail() + ")");
 		///////////////////
 		/*vehicleExists = vehicleService.findVehiclebyRegno(vehicle.getVehicleRegno());
 		if (vehicleExists != null) {
@@ -186,7 +186,7 @@ public class LoginController {
 
 			orderService.saveOrder(user,order,vehicleExists);
 			modelAndView.addObject("successMessage", "Vehicle has been registered successfully");
-			modelAndView.addObject("order", new Order());
+			modelAndView.addObject("order", new Order_());
 			modelAndView.setViewName("orderPage");
 			
 		}

@@ -7,7 +7,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.model.Order;
+import com.example.model.Order_;
 import com.example.model.Role;
 import com.example.model.User;
 import com.example.model.Vehicle;
